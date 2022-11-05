@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <string>
+#include <node.hh>
 
 using namespace std;
 
-void ReadFile(node* n, char* arq) {
+/// @brief funcao onde le e retorna o valor em string
+/// @param arq argumento do arquivo
+/// @return texto inserido dentro 
+string ReadFile(char* arq) {
     FILE *file;
-    //nome do arquivo - talvez de erro, pois é necessário da extensão (não sei como vai vir no parâmetro)
+    //nome do arquivo
     file = fopen(arq, "r");
     string allWords;
 
@@ -18,8 +22,9 @@ void ReadFile(node* n, char* arq) {
 
     //le tudo do file
     fscanf(file, "%[^EOF]s", &allWords);
-    printf("%s", allWords);
 
     //fecha o file
     fclose(file);
+
+    return allWords;
 } 
