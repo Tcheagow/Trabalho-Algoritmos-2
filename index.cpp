@@ -1,6 +1,5 @@
 #include <iostream>
-
-using namespace std;
+#include <node.hh>
 
 /// @brief conversao via char do c
 /// @param a ponteiro para a primeira casa do char
@@ -17,4 +16,9 @@ int charToInt(char* a) {
 int main(int argc, char *argv[]) {
     int num = charToInt(argv[1]);
 
+    node cabeca = {nullptr, "", nullptr};
+    cabeca.count = new int[num];
+    
+    
+    return 0;
 }
