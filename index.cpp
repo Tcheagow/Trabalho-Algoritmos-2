@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
     for(int i = 0; i < num; i++)
         fromFile(&header, num,  i, argv[i + 2] );
     
+    toFile(&header, num);
     
     return 0;
 }

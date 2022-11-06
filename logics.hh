@@ -36,6 +36,9 @@ bool isClearOfNonLetters(string word, int index) {
     return (((word[index] >= 'a' && word[index] <= 'z')) || word[index] == ' ');
 }
 
+/// @brief filtra valores que nao sejam caracteres alfabeticos
+/// @param value valor a ser filtrado
+/// @return retorna a string filtrado
 string filter(string value) {
     int max = value.length();
     string finalValue("");
@@ -69,6 +72,11 @@ string readFile(char* arq) {
     return filter(allWords);
 }
 
+/// @brief fluxo principal de obter informacoes do arquivo
+/// @param header cabeca do no
+/// @param pageNum numero de paginas (total)
+/// @param thisPage numero da pagina atual
+/// @param arq argumento com o nome do arquivo
 void fromFile(node* header, int pageNum, int thisPage, char* arq) {
     string fileTxt = readFile(arq);
     string aux = "";
@@ -84,4 +92,19 @@ void fromFile(node* header, int pageNum, int thisPage, char* arq) {
     }
 }
 
+/// @brief cria o arquivo resultado
+/// @param header no da cabeca
+/// @param pageNum numero de paginas (total)
+void toFile(node* header, int pageNum) {
+    node* i = header->prox;
+    ofstream out("resultado.out");
 
+    for(; i != header; i = i->prox) {
+        string value = i->value;
+        for(int j = 0; j < pageNum; j++){
+            value += " " + to_string(i->count[j]);
+        }
+        
+        out << value << endl;
+    }
+}
