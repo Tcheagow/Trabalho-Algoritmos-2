@@ -1,5 +1,4 @@
-#include <iostream>
-#include <node.hh>
+#include "logics.hh"
 
 /// @brief conversao via char do c
 /// @param a ponteiro para a primeira casa do char
@@ -16,8 +15,11 @@ int charToInt(char* a) {
 int main(int argc, char *argv[]) {
     int num = charToInt(argv[1]);
 
-    node cabeca = {nullptr, "", nullptr};
-    cabeca.count = new int[num];
+    node header = {&header, "", nullptr};
+    header.count = new int[num];
+    
+    for(int i = 0; i < num; i++)
+        fromFile(&header, num,  i, argv[i + 2] );
     
     
     return 0;

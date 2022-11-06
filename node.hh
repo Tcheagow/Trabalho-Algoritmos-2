@@ -19,9 +19,8 @@ void createNode(node* proxN, node* n, string key, int pageNum, int thisPage) {
     n->prox = new node;
     n->prox->count = new int[pageNum];
     
-    for(int i = 0; i < pageNum; i++) {
+    for(int i = 0; i < pageNum; i++)
         n->prox->count[i] = 0;
-    }
 
     n->prox->count[thisPage] = 1;
 
@@ -42,8 +41,9 @@ void sumWord(node* n, int thisPage) {
 /// @param pageNum quantidade de paginas
 /// @param thisPage numero da pagina
 void addWord(node* header, string key, int pageNum, int thisPage) {
-
     node* i = header->prox;
+
+
     for(;i->prox != header; i = i->prox) {
         if(i->value.compare(key) == 0) {
             sumWord(i, thisPage);
