@@ -43,6 +43,12 @@ string readFile(char* arq) {
     string allWords = "";
     string aux;
 
+    if(file.fail()) {
+        cout << "Entrada inválida" << endl;
+        exit(404);
+    }
+
+
     while(getline(file, aux))
         allWords.append(lowerWord(aux));
 
