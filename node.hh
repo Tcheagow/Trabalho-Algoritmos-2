@@ -55,5 +55,8 @@ void addWord(node* header, string key, int pageNum, int thisPage) {
         }
     }
 
-    createNode(header, i, key, pageNum, thisPage);
+    if(i->value != key)// caso a ultima palavra se repita como ultima, ele nao verifica, ja que "i->prox != header", entao aqui se faz a verificacao
+        createNode(header, i, key, pageNum, thisPage); 
+    else
+        sumWord(i, thisPage);
 }
