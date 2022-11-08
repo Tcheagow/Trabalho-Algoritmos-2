@@ -25,7 +25,6 @@ string lowerWord(string params) {
 /// @details essa funcao usara a string ischar e os caracteres q nao estao dentro do range do 'a' e 'z' para verificar se corresponde, ja que tambem o valor pode estar fora como os apresentados na linha 44
 /// @return retorna verdadeiro para caso seja uma letra 
 bool isClearOfNonLetters(string word, int index) {
-
     string isChar = "ẃéŕýúíóṕáśǵj́ḱĺḉźǘńḿẽỹũĩõãṽñẁèỳùìòàǜǹm̀ŵêŷûîôâŝĝĥĵẑĉçäåæëïðöøüẂÉŔÝÚÍÓṔÁŚǴJ́ḰĹḈŹǗŃḾẼỸŨĨÕÃṼÑẀÈỲÙÌÒÀǛǸM̀ŴÊŶÛÎÔÂŜĜĤĴẐĈÇÄÅÆËÏÐÖØÜ";
     int lenghIsChar = isChar.length();
     

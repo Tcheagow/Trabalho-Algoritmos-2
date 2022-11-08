@@ -43,7 +43,6 @@ void sumWord(node* n, int thisPage) {
 void addWord(node* header, string key, int pageNum, int thisPage) {
     node* i = header->prox;
 
-
     for(;i->prox != header; i = i->prox) {
         if(i->value.compare(key) == 0) {
             sumWord(i, thisPage);
