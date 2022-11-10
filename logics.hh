@@ -10,8 +10,6 @@ using namespace std;
 string lowerWord(string params) {
     string value;
     int size = params.length();
-
-    setlocale(LC_ALL, "de_DE.utf8");
     
     for(int i = 0; i < size; i++)
         value += towlower(params[i]);  
@@ -25,14 +23,36 @@ string lowerWord(string params) {
 /// @details essa funcao usara a string ischar e os caracteres q nao estao dentro do range do 'a' e 'z' para verificar se corresponde, ja que tambem o valor pode estar fora como os apresentados na linha 44
 /// @return retorna verdadeiro para caso seja uma letra 
 bool isClearOfNonLetters(string word, int index) {
-    string isChar = "ẃéŕýúíóṕáśǵj́ḱĺḉźǘńḿẽỹũĩõãṽñẁèỳùìòàǜǹm̀ŵêŷûîôâŝĝĥĵẑĉçäåæëïðöøüẂÉŔÝÚÍÓṔÁŚǴJ́ḰĹḈŹǗŃḾẼỸŨĨÕÃṼÑẀÈỲÙÌÒÀǛǸM̀ŴÊŶÛÎÔÂŜĜĤĴẐĈÇÄÅÆËÏÐÖØÜ";
-    int lenghIsChar = isChar.length();
+    string isChar = "ÁÉÍÓÚÊÔÃÕÀÇáéíóúêôãõàç";
+    int lengthIsChar = isChar.length();
     
-    for(int i = 0; i < lenghIsChar; i++) {
+    for(int i = 0; i < lengthIsChar; i++) {
         if(word[index] == isChar[i]) return true;
     }
 
-    return (((word[index] >= 'a' && word[index] <= 'z')) || word[index] == ' ');
+    return false;
+}
+
+/// @brief atraves de um calculo simples retorna o oposto
+/// @param word string a se verificar
+/// @param index index da string a se verificar
+/// @return retorna a letra em minusculo
+string tolowerNonAscii(string word, int index) {
+    string aux;
+    aux += word[index];
+    aux += word[index + 1];
+
+    string toCheck[][2] =  {{"Á","á"}, {"É","é"}, {"Í","í"}, {"Ó","ó"}, {"Ú","ú"}, {"Ê","ê"}, {"Ô","ô"}, {"Ã","ã"}, {"Õ","õ"}, {"À","à"}, {"Ç","ç"}};
+
+    for(int i = 0; i < 21; i++) {
+        if(aux == toCheck[i][0]) {
+            aux = toCheck[i][1][0];
+            aux += toCheck[i][1][1];
+            return aux;
+        }
+    }
+
+    return aux;
 }
 
 /// @brief filtra valores que nao sejam caracteres alfabeticos
@@ -43,8 +63,12 @@ string filter(string value) {
     string finalValue("");
 
     for(int i = 0; i < max; i++)
-        if(isClearOfNonLetters(value, i))
+        if(((value[i] >= 'a' && value[i] <= 'z')) || value[i] == ' ')
             finalValue += value[i];
+        else if(isClearOfNonLetters(value, i)) {
+            finalValue += tolowerNonAscii(value, i);
+            i++;
+        }
 
     return finalValue;
 }
@@ -104,6 +128,8 @@ void toFile(node* header, int pageNum) {
             value += " " + to_string(i->count[j]);
         }
         
-        out << value << endl;
+        out << value;
+        if(i->prox != header)
+            out << endl;
     }
 }
