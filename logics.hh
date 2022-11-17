@@ -128,8 +128,6 @@ void toFile(node* header, int pageNum) {
             value += " " + to_string(i->count[j]);
         }
         
-        out << value;
-        if(i->prox != header)
-            out << endl;
+        out << value << endl;
     }
 }
