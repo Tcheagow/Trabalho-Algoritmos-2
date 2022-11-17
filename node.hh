@@ -43,19 +43,22 @@ void sumWord(node* n, int thisPage) {
 void addWord(node* header, string key, int pageNum, int thisPage) {
     node* i = header->prox;
 
-    for(;i->prox != header; i = i->prox) {
+    if(i == header) {
+        createNode(header, header, key, pageNum, thisPage);
+        return;    
+    } else if(i->value.compare(key) > 0){
+        createNode(i, header, key, pageNum, thisPage);
+        return;
+    }
+
+    for(;i != header; i = i->prox) {
         if(i->value.compare(key) == 0) {
             sumWord(i, thisPage);
             return;
         }
-        if(i->prox->value.compare(key) > 0) {
+        if(i->prox->value.compare(key) > 0 || i->prox == header) {
            createNode(i->prox, i, key, pageNum, thisPage);
            return;
         }
     }
-
-    if(i->value != key)// caso a ultima palavra se repita como ultima, ele nao verifica, ja que "i->prox != header", entao aqui se faz a verificacao
-        createNode(header, i, key, pageNum, thisPage); 
-    else
-        sumWord(i, thisPage);
 }
